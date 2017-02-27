@@ -44,6 +44,8 @@
     markdown-mode
     php-mode
     ac-php
+    flycheck
+    yaml-mode
     ))
 
 ;; On OS X, an Emacs instance started from the graphical user
@@ -80,36 +82,21 @@
 ;; Customization
 ;;;;
 
-;; Add a directory to our load path so that when you `load` things
-;; below, Emacs knows where to look for the corresponding file.
 (add-to-list 'load-path "~/.emacs.d/customizations")
-
-;; Sets up exec-path-from-shell so that Emacs will use the correct
-;; environment variables
 (load "shell-integration.el")
-
-;; These customizations make it easier for you to navigate files,
-;; switch buffers, and choose options from the minibuffer.
+(load "setup-flycheck.el")
 (load "navigation.el")
-
-;; These customizations change the way emacs looks and disable/enable
-;; some user interface elements
 (load "ui.el")
-
-;; These customizations make editing a bit nicer.
 (load "editing.el")
-
-;; Hard-to-categorize customizations
 (load "misc.el")
-
-;; For editing lisps
 (load "elisp-editing.el")
 
-;; Langauage-specific
+;; Languages
 (load "setup-clojure.el")
 (load "setup-js.el")
 (load "setup-md.el")
 (load "setup-php.el")
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
