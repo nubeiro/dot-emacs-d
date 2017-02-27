@@ -6,9 +6,6 @@
   (add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/")))
 (package-initialize)
 
-;; Download the ELPA archive description if needed.
-;; This informs Emacs about the latest versions of all packages, and
-;; makes them available for download.
 (unless package-archive-contents
   (package-refresh-contents))
 
@@ -24,47 +21,29 @@
 ;; manually with M-x package-install
 ;; Add in your own as you wish:
 (defvar my-packages
-  '(;; makes handling lisp expressions much, much easier
+  '(
     ;; Cheatsheet: http://www.emacswiki.org/emacs/PareditCheatsheet
     paredit
-
-    ;; key bindings and code colorization for Clojure
     ;; https://github.com/clojure-emacs/clojure-mode
     clojure-mode
-
-    ;; extra syntax highlighting for clojure
     clojure-mode-extra-font-locking
-
-    ;; integration with a Clojure REPL
     ;; https://github.com/clojure-emacs/cider
     cider
-
-    ;; allow ido usage in as many contexts as possible. see
-    ;; customizations/navigation.el line 23 for a description
-    ;; of ido
     ido-ubiquitous
-
-    ;; Enhances M-x to allow easier execution of commands. Provides
-    ;; a filterable list of possible commands in the minibuffer
     ;; http://www.emacswiki.org/emacs/Smex
     smex
-
     ;; project navigation
     projectile
-
     ;; colorful parenthesis matching
     rainbow-delimiters
-
     ;; edit html tags like sexps
     tagedit
-
-    ;; git integration
     magit
-    ;; solarized!
     solarized-theme
-    ;;
     color-theme-sanityinc-tomorrow
     markdown-mode
+    php-mode
+    ac-php
     ))
 
 ;; On OS X, an Emacs instance started from the graphical user
@@ -130,6 +109,7 @@
 (load "setup-clojure.el")
 (load "setup-js.el")
 (load "setup-md.el")
+(load "setup-php.el")
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

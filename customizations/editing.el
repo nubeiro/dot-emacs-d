@@ -11,6 +11,9 @@
         try-expand-dabbrev-from-kill
         try-complete-lisp-symbol-partially
         try-complete-lisp-symbol))
+;; enable right alt as alt key
+(setq ns-right-alternate-modifier nil)
+
 
 ;; Highlights matching parenthesis
 (show-paren-mode 1)
