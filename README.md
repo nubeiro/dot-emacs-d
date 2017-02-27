@@ -4,4 +4,14 @@ Inspired by [Chapter2 from Clojure for the Brave and True](http://www.bravecloju
 
 Evolved into my own thingy. 
 
+## TODO ##
+
+* customize for PHP editing. 
+    * pending packages: ac-php
+
+* customize for Python
+
+* org-mode setup
+
+* calendar setup
 
