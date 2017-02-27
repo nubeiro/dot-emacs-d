@@ -32,6 +32,7 @@
     tagedit
     magit
     git-gutter
+    git-timemachine
     solarized-theme
     color-theme-sanityinc-tomorrow
     markdown-mode
