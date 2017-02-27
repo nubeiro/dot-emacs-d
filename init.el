@@ -31,6 +31,7 @@
     rainbow-delimiters
     tagedit
     magit
+    git-gutter
     solarized-theme
     color-theme-sanityinc-tomorrow
     markdown-mode
@@ -60,9 +61,24 @@
 (load "editing.el")
 (load "misc.el")
 (load "elisp-editing.el")
-
+(load "setup-magit.el")
 ;; Languages
 (load "setup-clojure.el")
 (load "setup-js.el")
 (load "setup-md.el")
 (load "setup-php.el")
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(coffee-tab-width 2)
+ '(package-selected-packages
+   (quote
+    (git-gutter yaml-mode tagedit solarized-theme smex rainbow-delimiters projectile paredit markdown-mode magit ido-ubiquitous flycheck exec-path-from-shell color-theme-sanityinc-tomorrow clojure-mode-extra-font-locking cider ac-php))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
