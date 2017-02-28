@@ -5,8 +5,6 @@ Inspired by [Chapter2 from Clojure for the Brave and True](http://www.bravecloju
 Evolved into my own thingy. 
 
 ## TODO ##
-
-* https://gitlab.com/buildfunthings/emacs-config/blob/master/loader.org
 * command-log?
 
 * customize for PHP editing. 
@@ -17,4 +15,10 @@ Evolved into my own thingy.
 * org-mode setup
 
 * calendar setup
+
+## References ##
+
+* https://gitlab.com/buildfunthings/emacs-config/blob/master/loader.org
+* http://pages.sachachua.com/.emacs.d/Sacha.html
+
 
