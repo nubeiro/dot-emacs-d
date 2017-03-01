@@ -5,6 +5,7 @@ Inspired by [Chapter2 from Clojure for the Brave and True](http://www.bravecloju
 Evolved into my own thingy. 
 
 ## TODO ##
+* command-log?
 
 * customize for PHP editing. 
     * pending packages: ac-php
@@ -14,4 +15,10 @@ Evolved into my own thingy.
 * org-mode setup
 
 * calendar setup
+
+## References ##
+
+* https://gitlab.com/buildfunthings/emacs-config/blob/master/loader.org
+* http://pages.sachachua.com/.emacs.d/Sacha.html
+
 

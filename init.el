@@ -21,24 +21,31 @@
 ;; manually with M-x package-install
 ;; Add in your own as you wish:
 (defvar my-packages
-  '(paredit
+  '(;;LISPy packages
+    paredit
     clojure-mode
     clojure-mode-extra-font-locking
     cider
+    geiser
+    rainbow-delimiters
+    ;; emacsy packages
     ido-ubiquitous
     smex
     projectile
-    rainbow-delimiters
     tagedit
+    flycheck
+    company
+    ;; git
     magit
     git-gutter
     git-timemachine
+    ;;themes
     solarized-theme
     color-theme-sanityinc-tomorrow
+    ;; other language
     markdown-mode
     php-mode
     ac-php
-    flycheck
     yaml-mode))
 
 (if (eq system-type 'darwin)
@@ -57,6 +64,7 @@
 (add-to-list 'load-path "~/.emacs.d/customizations")
 (load "shell-integration.el")
 (load "setup-flycheck.el")
+(load "setup-company.el")
 (load "navigation.el")
 (load "ui.el")
 (load "editing.el")
