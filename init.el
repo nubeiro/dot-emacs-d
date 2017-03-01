@@ -5,23 +5,76 @@
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
-;; paredit
+
+(use-package company
+  :ensure t
+  :defer t
+  :init 
+  (global-company-mode)
+  (setq company-tooltip-align-annotations t
+        ;; Easy navigation to candidates with M-<n>
+        company-show-numbers t)
+  (setq company-dabbrev-downcase nil)
+  :config 
+  (progn
+    ;; Use Company for completion
+    (bind-key [remap completion-at-point] #'company-complete company-mode-map))
+  :diminish company-mode)
+
 (use-package paredit
   :ensure t
-  :init
+  :config
   (dolist (hook '(emacs-lisp-mode-hook 
                   lisp-mode-hook
-                  clojure-mode-hook
-                  scheme-mode-hook
                   eval-expression-minibuffer-setup-hook
                   lisp-interaction-mode-hook))
     (add-hook hook 'paredit-mode))
   :diminish paredit-mode)
 
+(use-package rainbow-delimiters
+  :ensure t)
 
-(use-package clojure-mode)
+(use-package clojure-mode
+  :ensure t
+  :config
+  (add-hook 'clojure-mode-hook #'paredit-mode)
+  (add-hook 'clojure-mode-hook #'subword-mode)
+  (add-hook 'clojure-mode-hook #'rainbow-delimiters-mode)
+  ;; syntax highlighting for midje
+  (add-hook 'clojure-mode-hook
+            (lambda ()
+              (setq inferior-lisp-program "lein repl")
+              (font-lock-add-keywords
+               nil
+               '(("(\\(facts?\\)"
+                  (1 font-lock-keyword-face))
+                 ("(\\(background?\\)"
+                  (1 font-lock-keyword-face))))
+              (define-clojure-indent (fact 1))
+              (define-clojure-indent (facts 1))))
+  ;; Use clojure mode for other extensions
+  (add-to-list 'auto-mode-alist '("\\.edn$" . clojure-mode))
+  (add-to-list 'auto-mode-alist '("\\.boot$" . clojure-mode))
+  (add-to-list 'auto-mode-alist '("\\.cljs.*$" . clojure-mode))
+  (add-to-list 'auto-mode-alist '("lein-env" . enh-ruby-mode)))
 
+(use-package clojure-mode-extra-font-locking
+  :ensure t)
 
+(use-package cider
+  :ensure t
+  :init
+  (setq cider-repl-pop-to-buffer-on-connect t)
+  (setq cider-show-error-buffer t)
+  (setq cider-auto-select-error-buffer t)
+  (setq cider-repl-history-file "~/.emacs.d/cider-history")
+  (setq cider-repl-wrap-history t)
+  (setq cider-repl-use-pretty-printing t)
+  :config 
+  (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
+  (add-hook 'cider-repl-mode-hook 'paredit-mode)
+  (add-hook 'cider-repl-mode-hook #'company-mode)
+  (add-hook 'cider-mode-hook #'company-mode))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -47,18 +100,13 @@
 ;; Add in your own as you wish:
 (defvar my-packages
   '(;;LISPy packages
-
-    clojure-mode-extra-font-locking
-    cider
     geiser
-    rainbow-delimiters
     ;; emacsy packages
     ido-ubiquitous
     smex
     projectile
     tagedit
     flycheck
-    company
     ;; git
     magit
     git-gutter
@@ -88,14 +136,14 @@
 (add-to-list 'load-path "~/.emacs.d/customizations")
 (load "shell-integration.el")
 (load "setup-flycheck.el")
-(load "setup-company.el")
+
 (load "navigation.el")
 (load "ui.el")
 (load "editing.el")
 (load "misc.el")
 (load "setup-magit.el")
 ;; Languages
-(load "setup-clojure.el")
+
 (load "setup-js.el")
 (load "setup-md.el")
 (load "setup-php.el")
