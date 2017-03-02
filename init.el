@@ -1,12 +1,23 @@
 (require 'package)
 (setq package-enable-at-startup nil)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
 (package-initialize)
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
 (require 'use-package)
 (require 'diminish)
+
+(use-package ox-gfm
+  :ensure t)
+
+(use-package org
+  :ensure t
+  :mode ("\\.org$" . org-mode)
+  :config
+  (add-hook 'org-mode-hook 'turn-on-auto-fill)
+  (setq org-export-backends '(html beamer ascii latex md gfm)))
 
 (use-package company
   :ensure t
@@ -323,3 +334,18 @@
      (require 'tagedit)
      (tagedit-add-paredit-like-keybindings)
      (add-hook 'html-mode-hook (lambda () (tagedit-mode 1)))))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(frame-background-mode (quote dark))
+ '(package-selected-packages
+   (quote
+    (org org-ac use-package yaml-mode tagedit solarized-theme smex rainbow-delimiters projectile paredit markdown-mode magit ido-ubiquitous git-timemachine git-gutter geiser flycheck exec-path-from-shell company color-theme-sanityinc-tomorrow clojure-mode-extra-font-locking cider ac-php))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
