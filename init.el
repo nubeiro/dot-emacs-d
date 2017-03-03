@@ -148,8 +148,8 @@
   :defer t
   :init
   (global-git-gutter-mode t)
-  :config
   (git-gutter:linum-setup)
+  (setq git-gutter:update-interval 2)
   :diminish git-gutter-mode)
 
 (use-package git-timemachine
