@@ -135,7 +135,8 @@
   :ensure t
   :defer t
   :init
-  (global-flycheck-mode 1))
+  (global-flycheck-mode 1)
+  :diminish flycheck-mode)
 
 (use-package magit
   :ensure t
@@ -146,7 +147,8 @@
   :ensure t
   :defer t
   :init
-  (global-git-gutter-mode t))
+  (global-git-gutter-mode t)
+  :diminish git-gutter-mode)
 
 (use-package git-timemachine
   :ensure t
@@ -210,13 +212,19 @@
         (exec-path-from-shell-initialize)
         (exec-path-from-shell-copy-envs
          '("PATH")))))
+
+(use-package eldoc
+  :config
+  (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+  (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
+  (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
+  :diminish eldoc-mode)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; eldoc-mode shows documentation in the minibuffer when writing code
 ;; http://www.emacswiki.org/emacs/ElDoc
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
-(add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
-(add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; "When several buffers visit identically-named files,
 ;; Emacs must give the buffers distinct names. The usual method
@@ -318,3 +326,8 @@
      (tagedit-add-paredit-like-keybindings)
      (add-hook 'html-mode-hook (lambda () (tagedit-mode 1)))))
 
+(custom-set-variables
+ '(frame-background-mode (quote dark))
+ '(max-lisp-eval-depth 1800)
+ '(max-specpdl-size 1800))
+(custom-set-faces)
