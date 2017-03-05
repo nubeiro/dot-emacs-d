@@ -9,10 +9,8 @@ Evolved into my own thingy with use-package.
 * customize for PHP editing. 
 * customize for Python
 * org-mode setup
-* calendar setup
-
+* calendar setup with org-gcal
 ## References ##
-
 * https://gitlab.com/buildfunthings/emacs-config/blob/master/loader.org
 * http://pages.sachachua.com/.emacs.d/Sacha.html
 * https://github.com/waymondo/hemacs/blob/master/init.el

@@ -28,9 +28,7 @@
         company-show-numbers t
         company-dabbrev-downcase nil)
   :config 
-  (progn
-    ;; Use Company for completion
-    (bind-key [remap completion-at-point] #'company-complete company-mode-map))
+  (bind-key [remap completion-at-point] #'company-complete company-mode-map)
   :diminish company-mode)
 
 (use-package paredit
@@ -109,7 +107,8 @@
         ido-default-file-method 'selected-window
         ido-auto-merge-work-directories-length -1
         ido-use-virtual-buffers t)
-  (ido-mode +1))
+  (ido-mode +1)
+  (ido-everywhere t))
 
 (use-package ido-ubiquitous
   :ensure t
@@ -136,16 +135,18 @@
   :defer t
   :init
   (global-flycheck-mode 1)
+  :config 
+  (setq flycheck-display-errors-function #'flycheck-display-error-messages-unless-error-list)
   :diminish flycheck-mode)
 
 (use-package magit
   :ensure t
   :defer t
-  :bind ("C-x g" . magit-status))
+  :bind (("C-x g" . magit-status)
+         ("C-x M-g" . magit-dispatch-popup)))
 
 (use-package git-gutter
   :ensure t
-  :defer t
   :init
   (global-git-gutter-mode t)
   (git-gutter:linum-setup)
@@ -222,20 +223,8 @@
   (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
   :diminish eldoc-mode)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; eldoc-mode shows documentation in the minibuffer when writing code
-;; http://www.emacswiki.org/emacs/ElDoc
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; "When several buffers visit identically-named files,
-;; Emacs must give the buffers distinct names. The usual method
-;; for making buffer names unique adds ‘<2>’, ‘<3>’, etc. to the end
-;; of the buffer names (all but one of them).
-;; The forward naming method includes part of the file's directory
-;; name at the beginning of the buffer name
-;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Uniquify.html
-
+(use-package php-mode
+  :ensure t)
 
 ;; Shows a list of buffers
 (global-set-key (kbd "C-x C-b") 'ibuffer)
@@ -272,12 +261,6 @@
       auto-save-default nil
       create-lockfiles nil)
 
-(setq-default indent-tabs-mode nil)
-(setq-default frame-title-format "%b (%f)")
-;; shell scripts
-(setq-default sh-basic-offset 2)
-(setq-default sh-indentation 2)
-
 ;; Lisp-friendly hippie expand
 (setq hippie-expand-try-functions-list
       '(try-expand-dabbrev
@@ -285,13 +268,16 @@
         try-expand-dabbrev-from-kill
         try-complete-lisp-symbol-partially
         try-complete-lisp-symbol))
-
-;; Emacs can automatically create backup files. This tells Emacs to
-;; put all backups in ~/.emacs.d/backups. More info:
-;; http://www.gnu.org/software/emacs/manual/html_node/elisp/Backup-Files.html
 (setq backup-directory-alist `(("." . ,(concat user-emacs-directory
                                                "backups"))))
 
+(setq-default indent-tabs-mode nil)
+(setq-default frame-title-format "%b (%f)")
+;; shell scripts
+(setq-default sh-basic-offset 2)
+(setq-default sh-indentation 2)
+(setq-default initial-scratch-message
+              (concat ";; Happy hacking, " user-login-name " - Emacs ♥ you!\n\n"))
 ;; comments
 (defun toggle-comment-on-line ()
   "comment or uncomment current line"
@@ -319,8 +305,6 @@
 
 ;; Changes all yes/no questions to y/n type
 (fset 'yes-or-no-p 'y-or-n-p)
-
-
 (add-hook 'html-mode-hook 'subword-mode)
 (eval-after-load "sgml-mode"
   '(progn
