@@ -44,7 +44,9 @@
 
 (use-package rainbow-delimiters
   :ensure t
-  :defer t)
+  :defer t
+  :config
+  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
 (use-package clojure-mode
   :ensure t
@@ -196,10 +198,9 @@
 (use-package saveplace
   :init (save-place-mode 1)
   :config
-  (progn
-    (setq-default save-place t)
-    (setq save-place-file (concat user-emacs-directory "places")
-          save-place-limit nil)))
+  (setq-default save-place t)
+  (setq save-place-file (concat user-emacs-directory "places")
+        save-place-limit nil))
 
 (use-package js-mode
   :mode 
@@ -229,6 +230,35 @@
 
 (use-package php-mode
   :ensure t)
+
+(use-package python
+  :ensure t
+  :mode ("\\.py\\'" . python-mode)
+  :interpreter ("python" . python-mode)
+  :commands python-mode
+  :init 
+  (setq-default python-shell-interpreter "ipython"
+                python-shell-interpreter-args "--deep-reload"
+                python-shell-prompt-regexp "In \\[[0-9]+\\]: "
+                python-shell-prompt-block-regexp "\\.\\.\\.\\.: "
+                python-shell-prompt-output-regexp "Out\\[[0-9]+\\]: "
+                python-shell-completion-setup-code
+                "from IPython.core.completerlib import module_completion"
+                python-shell-completion-string-code
+                "';'.join(get_ipython().Completer.all_completions('''%s'''))\n" )
+  (add-hook 'python-mode-hook 'flycheck-mode))
+
+(use-package anaconda-mode
+  :ensure t
+  :after python
+  :init
+  (add-hook 'python-mode-hook 'anaconda-mode)
+  (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
+  (add-hook 'python-mode 'eldoc-mode))
+
+(use-package company-anaconda
+  :ensure t
+  :after anaconda-mode)
 
 ;; Shows a list of buffers
 (global-set-key (kbd "C-x C-b") 'ibuffer)
@@ -275,22 +305,17 @@
 (setq backup-directory-alist `(("." . ,(concat user-emacs-directory
                                                "backups"))))
 
-(setq-default indent-tabs-mode nil)
-(setq-default frame-title-format "%b (%f)")
-;; shell scripts
-(setq-default sh-basic-offset 2)
-(setq-default sh-indentation 2)
-(setq-default initial-scratch-message
-              (concat ";; Happy hacking, " user-login-name " - Emacs ♥ you!\n\n"))
-;; comments
+(setq-default indent-tabs-mode nil
+              frame-title-format "%b (%f)"
+              sh-basic-offset 2
+              sh-indentation 2
+              initial-scratch-message (concat ";; Happy hacking, " user-login-name " - Emacs ♥ you!\n\n"))
+              
 (defun toggle-comment-on-line ()
   "comment or uncomment current line"
   (interactive)
   (comment-or-uncomment-region (line-beginning-position) (line-end-position)))
 (global-set-key (kbd "C-;") 'toggle-comment-on-line)
-
-;; yay rainbows!
-(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 
 ;; use 2 spaces for tabs
 (defun die-tabs ()
@@ -317,7 +342,19 @@
      (add-hook 'html-mode-hook (lambda () (tagedit-mode 1)))))
 
 (custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(frame-background-mode (quote dark))
  '(max-lisp-eval-depth 1800)
- '(max-specpdl-size 1800))
-(custom-set-faces)
+ '(max-specpdl-size 1800)
+ '(package-selected-packages
+   (quote
+    (company-anaconda yaml-mode use-package tagedit solarized-theme smex rainbow-delimiters projectile paredit ox-gfm org markdown-mode magit ido-ubiquitous git-timemachine git-gutter geiser flycheck exec-path-from-shell company-jedi color-theme-sanityinc-tomorrow clojure-mode-extra-font-locking cider anaconda-mode ac-php))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

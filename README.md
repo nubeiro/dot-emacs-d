@@ -6,8 +6,6 @@ Evolved into my own thingy with use-package.
 
 ## TODO ##
 * command-log?
-* customize for PHP editing. 
-* customize for Python
 * org-mode setup
 * calendar setup with org-gcal
 ## References ##
@@ -15,3 +13,4 @@ Evolved into my own thingy with use-package.
 * http://pages.sachachua.com/.emacs.d/Sacha.html
 * https://github.com/waymondo/hemacs/blob/master/init.el
 * https://github.com/redguardtoo/mastering-emacs-in-one-year-guide
+* https://github.com/hlissner/.emacs.d/
