@@ -94,7 +94,11 @@
 (use-package geiser
   :ensure t
   :config
-  (add-hook 'scheme-mode-hook 'geiser-mode))
+  (add-hook 'scheme-mode-hook 'geiser-mode)
+  (setq geiser-default-implementation "mit"
+        geiser-active-implementations '(mit)
+        geiser-repl-query-on-kill-p  nil)
+  (add-to-list 'auto-mode-alist '("\\.scm\\'" . scheme-mode)))
 
 (use-package ido
   :ensure t
