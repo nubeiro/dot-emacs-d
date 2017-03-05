@@ -102,25 +102,6 @@
         geiser-repl-query-on-kill-p  nil)
   (add-to-list 'auto-mode-alist '("\\.scm\\'" . scheme-mode)))
 
-(use-package ido
-  :ensure t
-  :config
-  (setq ido-enable-prefix nil
-        ido-enable-flex-matching t
-        ido-create-new-buffer 'always
-        ido-use-filename-at-point nil
-        ido-max-prospects 10
-        ido-default-file-method 'selected-window
-        ido-auto-merge-work-directories-length -1
-        ido-use-virtual-buffers t)
-  (ido-mode +1)
-  (ido-everywhere t))
-
-(use-package ido-ubiquitous
-  :ensure t
-  :config
-  (ido-ubiquitous-mode +1))
-
 (use-package smex
   :ensure t
   :bind ("M-x" . smex)
@@ -131,7 +112,9 @@
 
 (use-package projectile
   :ensure t
-  :init (projectile-global-mode))
+  :init (projectile-global-mode)
+  :config 
+  (setq projectile-completion-system 'helm))
 
 (use-package tagedit
   :ensure t)
@@ -260,6 +243,18 @@
   :ensure t
   :after anaconda-mode)
 
+(use-package helm
+  :ensure t
+  :init
+  (require 'helm-config)
+  :config
+  (helm-mode 1))
+
+(use-package helm-projectile
+  :ensure t
+  :config
+  (helm-projectile-on))
+
 ;; Shows a list of buffers
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "s-t") '(lambda () (interactive)))
@@ -351,7 +346,7 @@
  '(max-specpdl-size 1800)
  '(package-selected-packages
    (quote
-    (company-anaconda yaml-mode use-package tagedit solarized-theme smex rainbow-delimiters projectile paredit ox-gfm org markdown-mode magit ido-ubiquitous git-timemachine git-gutter geiser flycheck exec-path-from-shell company-jedi color-theme-sanityinc-tomorrow clojure-mode-extra-font-locking cider anaconda-mode ac-php))))
+    (helm-projectile yaml-mode use-package tagedit solarized-theme smex rainbow-delimiters projectile paredit ox-gfm org markdown-mode magit ido-ubiquitous helm git-timemachine git-gutter geiser flycheck exec-path-from-shell company-jedi company-anaconda color-theme-sanityinc-tomorrow clojure-mode-extra-font-locking cider ac-php))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -14,3 +14,6 @@ Evolved into my own thingy with use-package.
 * https://github.com/waymondo/hemacs/blob/master/init.el
 * https://github.com/redguardtoo/mastering-emacs-in-one-year-guide
 * https://github.com/hlissner/.emacs.d/
+
+### On Helm vs Ido ###
+http://emacs.stackexchange.com/questions/2867/how-should-i-change-my-workflow-when-moving-from-ido-to-helm
