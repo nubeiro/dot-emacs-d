@@ -8,6 +8,7 @@
   (package-install 'use-package))
 (require 'use-package)
 (require 'diminish)
+(require 'bind-key)
 
 (use-package ox-gfm
   :ensure t)
@@ -15,9 +16,12 @@
 (use-package org
   :ensure t
   :mode ("\\.org$" . org-mode)
+  :bind (("C-c a" . org-agenda)
+         ("C-c l" . org-store-link))
   :config
   (add-hook 'org-mode-hook 'turn-on-auto-fill)
-  (setq org-export-backends '(html beamer ascii latex md gfm)))
+  (setq org-export-backends '(html beamer ascii latex md gfm)
+        org-log-done 'time))
 
 (use-package company
   :ensure t
