@@ -37,7 +37,8 @@
   (dolist (hook '(emacs-lisp-mode-hook 
                   lisp-mode-hook
                   eval-expression-minibuffer-setup-hook
-                  lisp-interaction-mode-hook))
+                  lisp-interaction-mode-hook
+                  scheme-mode-hook))
     (add-hook hook 'enable-paredit-mode))
   :diminish paredit-mode)
 
@@ -92,7 +93,6 @@
 
 (use-package geiser
   :ensure t
-  :defer t
   :config
   (add-hook 'scheme-mode-hook 'geiser-mode))
 
