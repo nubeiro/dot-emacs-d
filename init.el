@@ -28,7 +28,13 @@
                                  "~/.org-files/daily.org"
                                  "~/.org-files/journal.org"
                                  "~/.org-files/someday.org"
-                                 "~/.org-files/gtd.org"))))
+                                 "~/.org-files/gtd.org"))
+        org-todo-keywords '((sequence "TODO(t)"
+                                      "WIP(i!)"
+                                      "WAIT(w!)" 
+                                      "|" 
+                                      "DONE(d!)" 
+                                      "CANCELED(c!)"))))
 
 (use-package company
   :ensure t
