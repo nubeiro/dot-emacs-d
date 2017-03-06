@@ -21,7 +21,14 @@
   :config
   (add-hook 'org-mode-hook 'turn-on-auto-fill)
   (setq org-export-backends '(html beamer ascii latex md gfm)
-        org-log-done 'time))
+        org-log-done 'time
+        org-agenda-files (quote ("~/.org-files/npf-daily.org"
+                                 "~/.org-files/npf-projects.org"
+                                 "~/.org-files/coding-dojos.org"
+                                 "~/.org-files/daily.org"
+                                 "~/.org-files/journal.org"
+                                 "~/.org-files/someday.org"
+                                 "~/.org-files/gtd.org"))))
 
 (use-package company
   :ensure t
@@ -249,10 +256,28 @@
 
 (use-package helm
   :ensure t
+  :diminish helm-mode
   :init
-  (require 'helm-config)
+  (progn
+    (require 'helm-config)
+    (setq helm-candidate-number-limit 100)
+    ;; From https://gist.github.com/antifuchs/9238468
+    (setq helm-idle-delay 0.0 ; update fast sources immediately (doesn't).
+          helm-input-idle-delay 0.01  ; this actually updates things
+					; reeeelatively quickly.
+          helm-quick-update t
+          helm-M-x-requires-pattern nil
+          helm-ff-skip-boring-files t)
+    (helm-mode))
   :config
-  (helm-mode 1))
+  (ido-mode -1)
+  :bind (("C-c h" . helm-mini)
+		    ("C-h a" . helm-apropos)
+		    ("M-y" . helm-show-kill-ring)
+		    ("M-x" . helm-M-x)
+		    ("C-x c o" . helm-occur)
+		    ("C-x c s" . helm-swoop)
+		    ("C-x c SPC" . helm-all-mark-rings)))
 
 (use-package helm-projectile
   :ensure t
@@ -293,6 +318,9 @@
       electric-indent-mode nil
       auto-save-default nil
       create-lockfiles nil)
+
+(setq user-full-name "Raúl Araya"
+      user-mail-address "nubeiro@gmail.com")
 
 ;; Lisp-friendly hippie expand
 (setq hippie-expand-try-functions-list
