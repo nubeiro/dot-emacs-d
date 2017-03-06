@@ -20,6 +20,7 @@
          ("C-c l" . org-store-link))
   :config
   (add-hook 'org-mode-hook 'turn-on-auto-fill)
+  (add-hook 'org-mode-hook #'visual-line-mode)
   (setq org-export-backends '(html beamer ascii latex md gfm)
         org-log-done 'time
         org-agenda-files (quote ("~/.org-files/npf-daily.org"
@@ -34,7 +35,10 @@
                                       "WAIT(w!)" 
                                       "|" 
                                       "DONE(d!)" 
-                                      "CANCELED(c!)"))))
+                                      "CANCELED(c!)"))
+        org-directory "~/.org-files/"
+        org-startup-indented t
+        org-hide-emphasis-markers t))
 
 (use-package company
   :ensure t
@@ -290,6 +294,11 @@
   :config
   (helm-projectile-on))
 
+(use-package linum
+  :ensure t
+  :config
+  (add-hook 'prog-mode-hook 'linum-mode))
+
 ;; Shows a list of buffers
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "s-t") '(lambda () (interactive)))
@@ -304,7 +313,7 @@
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (show-paren-mode 1)
-(global-linum-mode)
+
 (global-hl-line-mode 1)
 
 (when (fboundp 'scroll-bar-mode)
