@@ -335,6 +335,11 @@
   :config
   (add-hook 'prog-mode-hook 'linum-mode))
 
+(use-package evil
+  :ensure t
+  :config
+  (evil-mode 1))
+
 ;; Shows a list of buffers
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "s-t") '(lambda () (interactive)))
