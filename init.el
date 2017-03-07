@@ -65,9 +65,15 @@
 
 (use-package rainbow-delimiters
   :ensure t
-  :defer t
   :config
   (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+
+(use-package smartparens
+  :ensure t
+  :diminish smartparens-mode
+  :config
+  (smartparens-global-mode 1)
+  (add-hook 'prog-mode-hook 'turn-on-smartparens-strict-mode))
 
 (use-package clojure-mode
   :ensure t
