@@ -321,7 +321,7 @@
 (when (fboundp 'scroll-bar-mode)
   (scroll-bar-mode -1))
 
-(set-face-attribute 'default nil :height 150)
+(set-face-attribute 'default nil :family "Anonymous Pro" :height 150)
 (setq ring-bell-function 'ignore
       x-select-enable-clipboard t
       x-select-enable-primary t
