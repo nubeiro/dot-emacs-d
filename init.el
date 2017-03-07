@@ -313,6 +313,12 @@
         ("C-x C-f" . helm-find-files)
         :map helm-map ([tab] . helm-execute-persistent-action)))
 
+(use-package helm-swoop
+  :ensure t
+  :after helm
+  :bind (("C-c o" . helm-swoop)
+         ("C-c M-o" . helm-swoop)))
+
 (use-package helm-projectile
   :ensure t
   :config
