@@ -302,14 +302,16 @@
         helm-ff-auto-update-initial-value t
         helm-M-x-requires-pattern nil
         helm-ff-skip-boring-files t)
-  :bind (("C-x b" . helm-mini)
-         ("C-h a" . helm-apropos)
-         ("M-y" . helm-show-kill-ring)
-         ("M-x" . helm-M-x)
-         ("C-x c o" . helm-occur)
-         ("C-x c s" . helm-swoop)
-         ("C-x c SPC" . helm-all-mark-rings)
-         ("C-x C-f" . helm-find-files)))
+  :bind(
+        ("C-x b" . helm-mini)
+        ("C-h a" . helm-apropos)
+        ("M-y" . helm-show-kill-ring)
+        ("M-x" . helm-M-x)
+        ("C-x c o" . helm-occur)
+        ("C-x c s" . helm-swoop)
+        ("C-x c SPC" . helm-all-mark-rings)
+        ("C-x C-f" . helm-find-files)
+        :map helm-map ([tab] . helm-execute-persistent-action)))
 
 (use-package helm-projectile
   :ensure t
@@ -341,7 +343,7 @@
 (when (fboundp 'scroll-bar-mode)
   (scroll-bar-mode -1))
 
-(set-face-attribute 'default nil :family "Anonymous Pro" :height 150)
+(set-face-attribute 'default nil :family "Anonymous Pro" :height 160)
 (setq ring-bell-function 'ignore
       x-select-enable-clipboard t
       x-select-enable-primary t
