@@ -26,16 +26,21 @@
         org-agenda-files (quote ("~/.org-files/npf-daily.org"
                                  "~/.org-files/npf-projects.org"
                                  "~/.org-files/coding-dojos.org"
-                                 "~/.org-files/daily.org"
                                  "~/.org-files/journal.org"
                                  "~/.org-files/someday.org"
                                  "~/.org-files/gtd.org"))
-        org-todo-keywords '((sequence "TODO(t)"
+        org-todo-keywords '((sequence "TODO(t!)"
                                       "WIP(i!)"
                                       "WAIT(w!)" 
                                       "|" 
                                       "DONE(d!)" 
                                       "CANCELED(c!)"))
+        org-highest-priority ?A
+        org-lowest-priority ?C
+        org-default-priority ?A
+        org-priority-faces '((?A . (:foreground "#F0DFAF" :weight bold))
+                           (?B . (:foreground "LightSteelBlue"))
+                           (?C . (:foreground "OliveDrab")))
         org-directory "~/.org-files/"
         org-startup-indented t
         org-hide-emphasis-markers t))
