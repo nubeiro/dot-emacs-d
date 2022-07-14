@@ -1,0 +1,121 @@
+
+* init.el
+
+#+BEGIN_SRC emacs-lisp
+  ;;; init.el --- emacs config
+#+END_SRC
+ 
+** UI
+Hide scroll bar
+#+BEGIN_SRC emacs-lisp
+  (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+  (if (fboundp 'horizontal-scroll-bar-mode) (horizontal-scroll-bar-mode -1))  
+#+END_SRC
+
+Hide tool bar
+#+BEGIN_SRC emacs-lisp
+  (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+#+END_SRC
+
+** Language and encoding
+Prefer utf-8
+#+BEGIN_SRC emacs-lisp
+  (prefer-coding-system 'utf-8)
+#+END_SRC
+
+Setup language env to use utf8
+#+BEGIN_SRC emacs-lisp
+  (set-language-environment "UTF-8")
+#+END_SRC
+Default coding systems to utf8
+#+BEGIN_SRC emacs-lisp
+  (set-default-coding-systems 'utf-8)
+#+END_SRC
+
+** Transparency
+#+BEGIN_SRC emacs-lisp
+(set-frame-parameter (selected-frame) 'alpha '(95 70))
+(add-to-list 'default-frame-alist '(alpha 95 70))
+#+END_SRC
+
+** Custom
+Set location of custom file
+#+BEGIN_SRC emacs-lisp
+(setq custom-file (expand-file-name "~/.config/emacs/custom.el"))
+#+END_SRC
+Load custom file
+#+BEGIN_SRC emacs-lisp
+  (load custom-file)
+#+END_SRC
+
+** Package manager
+Bootstrap use-package
+#+BEGIN_SRC emacs-lisp
+(require 'package)
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+#+END_SRC
+Report loading and configuration
+#+begin_src emacs-lisp
+  (setq use-package-verbose t)
+#+end_src
+Always ensure packages are installed when running on a non-guix system.
+
+#+begin_src emacs-lisp
+(unless (file-exists-p "/gnu/store")
+  (require 'use-package-ensure)
+  (setq use-package-always-ensure t))
+#+end_src
+
+** Mac OS X
+Use $PATH from shell
+#+begin_src emacs-lisp
+  (use-package exec-path-from-shell
+    :init
+    (setq exec-path-from-shell-variables
+        '("CHROME_EXECUTABLE"
+          "EDITOR"
+          "GOOGLE_APPLICATION_CREDENTIALS"
+          "MANPATH"
+          "METALS_JAVA_OPTS"
+          "METALS_JDK_PATH"
+          "NPM_PACKAGES"
+          "NUCLI_HOME"
+          "NUCLI_PY_FULL"
+          "NU_COUNTRY"
+          "NU_HOME"
+          "PATH"
+          "SPARK_HOME"
+          "XDG_CONFIG_DIRS"
+          "XDG_DATA_DIRS"))
+    (exec-path-from-shell-initialize))
+#+end_src
+
+Setup alt and meta
+#+begin_src emacs-lisp
+(setq mac-option-key-is-meta t)
+(setq mac-right-option-modifier nil)
+#+end_src
+
+** Theme solarized
+#+begin_src emacs-lisp
+  (use-package solarized-theme
+    :ensure t
+    :config
+    (customize-set-variable 'frame-background-mode 'dark)
+    (load-theme 'solarized-dark t))
+#+end_src
+
+** Font selection + window
+Use dank mono
+#+begin_src emacs-lisp
+  (set-face-attribute 'default nil 
+         :font "Dank Mono"
+         :height 180
+         :weight 'normal
+         :width 'normal)
+#+end_src
+Set window size
+
+** Keybindings 
