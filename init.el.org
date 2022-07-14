@@ -17,6 +17,48 @@ Hide tool bar
   (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 #+END_SRC
 
+Get a simple starting screen
+#+begin_src emacs-lisp
+  (setq inhibit-startup-message t
+      initial-scratch-message ""
+      initial-major-mode 'fundamental-mode
+      inhibit-splash-screen t)
+#+end_src
+
+Highlight current line
+#+begin_src emacs-lisp
+  (global-hl-line-mode)
+#+end_src
+
+Enable column numbers
+#+begin_src emacs-lisp
+  (column-number-mode)
+#+end_src
+
+*** Transparency
+#+BEGIN_SRC emacs-lisp
+(set-frame-parameter (selected-frame) 'alpha '(95 70))
+(add-to-list 'default-frame-alist '(alpha 95 70))
+#+END_SRC
+
+*** Font and window size 
+Use dank mono
+#+begin_src emacs-lisp
+  (set-face-attribute 'default nil 
+         :font "Dank Mono"
+         :height 185
+         :weight 'normal
+         :width 'normal)
+#+end_src
+Set window size
+#+begin_src emacs-lisp
+(setq initial-frame-alist
+      '((width . 140)   ; characters in a line
+        (height . 38))) ; number of lines
+(setq default-frame-alist
+      '((width . 140)   ; characters in a line
+        (height . 38))) ; number of lines
+#+end_src
 ** Language and encoding
 Prefer utf-8
 #+BEGIN_SRC emacs-lisp
@@ -30,12 +72,6 @@ Setup language env to use utf8
 Default coding systems to utf8
 #+BEGIN_SRC emacs-lisp
   (set-default-coding-systems 'utf-8)
-#+END_SRC
-
-** Transparency
-#+BEGIN_SRC emacs-lisp
-(set-frame-parameter (selected-frame) 'alpha '(95 70))
-(add-to-list 'default-frame-alist '(alpha 95 70))
 #+END_SRC
 
 ** Custom
@@ -98,7 +134,13 @@ Setup alt and meta
 (setq mac-right-option-modifier nil)
 #+end_src
 
-** Theme solarized
+Avoid creating new workspace when going full screen
+
+#+begin_src emacs-lisp
+  (setq ns-use-native-fullscreen nil)
+#+end_src
+
+** Theme 
 #+begin_src emacs-lisp
   (use-package solarized-theme
     :ensure t
@@ -106,16 +148,5 @@ Setup alt and meta
     (customize-set-variable 'frame-background-mode 'dark)
     (load-theme 'solarized-dark t))
 #+end_src
-
-** Font selection + window
-Use dank mono
-#+begin_src emacs-lisp
-  (set-face-attribute 'default nil 
-         :font "Dank Mono"
-         :height 180
-         :weight 'normal
-         :width 'normal)
-#+end_src
-Set window size
 
 ** Keybindings 
