@@ -117,6 +117,7 @@ Always ensure packages are installed when running on a non-guix system.
 ** Mac OS X
 Use $PATH from shell
 #+begin_src emacs-lisp
+(when (memq window-system '(mac ns))
   (use-package exec-path-from-shell
     :init
     (setq exec-path-from-shell-variables
@@ -135,13 +136,15 @@ Use $PATH from shell
           "SPARK_HOME"
           "XDG_CONFIG_DIRS"
           "XDG_DATA_DIRS"))
-    (exec-path-from-shell-initialize))
+    (exec-path-from-shell-initialize)))
 #+end_src
 
 Setup alt and meta
 #+begin_src emacs-lisp
-(setq mac-option-key-is-meta t)
-(setq mac-right-option-modifier nil)
+
+  (when (memq window-system '(mac ns))
+    (setq mac-option-key-is-meta t)
+    (setq mac-right-option-modifier nil))
 #+end_src
 
 Avoid creating new workspace when going full screen
