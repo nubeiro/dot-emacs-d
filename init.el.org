@@ -69,6 +69,10 @@ Set window size
       '((width . 140)   ; characters in a line
         (height . 38))) ; number of lines
 #+end_src
+*** Delete selection with keypress
+#+begin_src emacs-lisp
+(delete-selection-mode t)
+#+end_src
 ** Language and encoding
 Prefer utf-8
 #+BEGIN_SRC emacs-lisp
