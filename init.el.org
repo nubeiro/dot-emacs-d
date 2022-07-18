@@ -1,4 +1,3 @@
-
 * init.el
 
 #+BEGIN_SRC emacs-lisp
@@ -73,6 +72,19 @@ Set window size
 #+begin_src emacs-lisp
 (delete-selection-mode t)
 #+end_src
+*** Enable short answers
+#+begin_src emacs-lisp
+(fset 'yes-or-no-p 'y-or-n-p)
+#+end_src
+*** Cleanup trailing whitespace on save
+#+begin_src 
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+#+end_src
+*** Cursor blinks
+#+begin_src emacs-lisp
+(blink-cursor-mode t)
+#+end_src
+
 ** Language and encoding
 Prefer utf-8
 #+BEGIN_SRC emacs-lisp
@@ -118,6 +130,10 @@ Always ensure packages are installed when running on a non-guix system.
   (setq use-package-always-ensure t))
 #+end_src
 
+Diminish
+#+begin_src emacs-lisp
+(use-package diminish)
+#+end_src
 ** Mac OS X
 Use $PATH from shell
 #+begin_src emacs-lisp
@@ -164,6 +180,12 @@ Avoid creating new workspace when going full screen
     :config
     (customize-set-variable 'frame-background-mode 'dark)
     (load-theme 'solarized-dark t))
+#+end_src
+
+** Rainbow delimiters
+#+begin_src emacs-lisp
+(use-package rainbow-delimiters)
+(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 #+end_src
 
 ** Keybindings 
