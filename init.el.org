@@ -17,6 +17,11 @@ Hide tool bar
   (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 #+END_SRC
 
+Hide menu bar
+#+begin_src emacs-lisp
+  (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+#+end_src
+
 Get a simple starting screen
 #+begin_src emacs-lisp
   (setq inhibit-startup-message t
