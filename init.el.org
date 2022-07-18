@@ -188,4 +188,59 @@ Avoid creating new workspace when going full screen
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 #+end_src
 
-** Keybindings 
+** Keybindings
+** Elixir
+#+begin_src emacs-lisp
+  (use-package elixir-mode
+  :bind (:map elixir-mode-map
+              ("C-c C-f" . elixir-format)))
+#+end_src
+
+** Company mode (autocomplete)
+#+begin_src emacs-lisp
+  (use-package company
+  :defer 1
+  :init
+  (global-company-mode)
+  ;; No delay in showing suggestions.
+  (setq company-idle-delay 0)
+  ;; Show suggestions after entering one character.
+  (setq company-minimum-prefix-length 1)
+  ;; If enabled, selecting item before first or after last wraps around.
+  (setq company-selection-wrap-around t)
+  ;; Use tab key to cycle through suggestions.
+  (company-tng-configure-default))
+#+end_src
+
+First indent, then complete
+#+begin_src emacs-lisp
+  (global-set-key (kbd "TAB") #'company-indent-or-complete-common)
+#+end_src
+
+
+** Misc stuff
+Short answers
+#+begin_src emacs-lisp
+  (setq use-short-answers t)
+#+end_src
+
+Highlight matching parenthesis when point is on them
+#+begin_src emacs-lisp
+  (show-paren-mode 1)
+#+end_src
+
+** Evil mode
+#+begin_src emacs-lisp
+  (use-package evil
+    :ensure t
+    :init
+    (setq evil-search-modle 'evil-search)
+    (setq evil-ex-complete-emacs-commands nil)
+    (setq evil-vsplit-window-right t)
+    (setq evil-split-window-below t)
+    (setq evil-shift-round nil)
+    (setq evil-want-C-u-scroll t)
+    :config
+    (evil-mode))
+#+end_src
+
