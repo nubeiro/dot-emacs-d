@@ -40,6 +40,11 @@ Enable column numbers
   (column-number-mode)
 #+end_src
 
+Enable line numbers for programming modes
+#+begin_src emacs-lisp
+  (add-hook 'prog-mode-hook 'display-line-numbers-mode)
+#+end_src
+
 *** Transparency
 #+BEGIN_SRC emacs-lisp
 (set-frame-parameter (selected-frame) 'alpha '(95 70))
