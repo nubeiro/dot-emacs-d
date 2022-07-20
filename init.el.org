@@ -244,3 +244,21 @@ Highlight matching parenthesis when point is on them
     (evil-mode))
 #+end_src
 
+** Version Control
+*** Magit
+#+begin_src emacs-lisp
+(use-package magit
+  :bind ("C-x g" . magit-status)
+  :init
+  (setq magit-diff-refine-hunk t)
+  :config
+  (setq git-commit-fill-column 70))
+#+end_src
+
+*** Git Gutter
+#+begin_src emacs-lisp
+(use-package diff-hl
+  :hook (prog-mode . diff-hl-mode))
+#+end_src
+
+
