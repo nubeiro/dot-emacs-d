@@ -228,6 +228,8 @@ Highlight matching parenthesis when point is on them
 #+begin_src emacs-lisp
   (show-paren-mode 1)
 #+end_src
+** todo stuff
+- review crux, useful functions. https://github.com/bbatsov/crux
 
 ** Evil mode
 #+begin_src emacs-lisp
@@ -262,3 +264,10 @@ Highlight matching parenthesis when point is on them
 #+end_src
 
 
+
+** Expand region
+#+begin_src emacs-lisp
+(use-package expand-region
+  :commands er/expand-region
+  :bind ("M-2" . er/expand-region))
+#+end_src
