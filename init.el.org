@@ -199,9 +199,9 @@ Avoid creating new workspace when going full screen
 ** Company mode (autocomplete)
 #+begin_src emacs-lisp
   (use-package company
-  :defer 1
-  :init
-  (global-company-mode)
+  :diminish
+  :config
+  (add-hook 'after-init-hook 'global-company-mode)
   ;; No delay in showing suggestions.
   (setq company-idle-delay 0)
   ;; Show suggestions after entering one character.
@@ -228,9 +228,13 @@ Highlight matching parenthesis when point is on them
 #+begin_src emacs-lisp
   (show-paren-mode 1)
 #+end_src
+Electric pair mode: insert matching closing delimiters ()
+#+begin_src emacs-lisp
+(electric-pair-mode t)
+#+end_src
 ** todo stuff
 - review crux, useful functions. https://github.com/bbatsov/crux
-
+  
 ** Evil mode
 #+begin_src emacs-lisp
   (use-package evil
@@ -271,3 +275,5 @@ Highlight matching parenthesis when point is on them
   :commands er/expand-region
   :bind ("M-2" . er/expand-region))
 #+end_src
+
+** Org Mode Settings
