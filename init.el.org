@@ -277,3 +277,9 @@ Electric pair mode: insert matching closing delimiters ()
 #+end_src
 
 ** Org Mode Settings
+** Doom mode line
+#+begin_src emacs-lisp
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1))
+#+end_src
