@@ -195,6 +195,11 @@ Avoid creating new workspace when going full screen
   :bind (:map elixir-mode-map
               ("C-c C-f" . elixir-format)))
 #+end_src
+** Rust
+#+begin_src emacs-lisp
+  (use-package rust-mode)
+#+end_src
+
 
 ** Company mode (autocomplete)
 #+begin_src emacs-lisp
